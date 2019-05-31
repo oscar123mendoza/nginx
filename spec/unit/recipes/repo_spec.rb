@@ -23,7 +23,7 @@ describe 'nginx::repo' do
   context 'Debian' do
     let(:chef_run) do
       ChefSpec::SoloRunner.new(
-        platform: 'debian', version: '8.9'
+        platform: 'debian', version: '8'
       ).converge(described_recipe)
     end
 
@@ -58,7 +58,7 @@ describe 'nginx::repo' do
   context 'RHEL' do
     let(:chef_run) do
       ChefSpec::SoloRunner.new(
-        platform: 'centos', version: '6.9'
+        platform: 'centos', version: '6'
       ).converge(described_recipe)
     end
 

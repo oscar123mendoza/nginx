@@ -67,7 +67,7 @@ describe 'nginx::source' do
   end
 
   let(:chef_run) do
-    ChefSpec::SoloRunner.new(platform: 'debian', version: '7.11').converge(described_recipe)
+    ChefSpec::SoloRunner.new(platform: 'debian', version: '7').converge(described_recipe)
   end
 
   before do
@@ -90,7 +90,7 @@ describe 'nginx::source' do
 
   context 'On Debian 8' do
     let(:chef_run) do
-      ChefSpec::SoloRunner.new(platform: 'debian', version: '8.9').converge('nginx::source')
+      ChefSpec::SoloRunner.new(platform: 'debian', version: '8').converge('nginx::source')
     end
 
     it 'installs packages dependencies' do
@@ -104,7 +104,7 @@ describe 'nginx::source' do
 
   context 'On RHEL 6' do
     let(:chef_run) do
-      ChefSpec::SoloRunner.new(platform: 'centos', version: '6.9').converge('nginx::source')
+      ChefSpec::SoloRunner.new(platform: 'centos', version: '6').converge('nginx::source')
     end
 
     it 'creates init script' do

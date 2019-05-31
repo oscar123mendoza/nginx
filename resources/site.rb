@@ -1,19 +1,17 @@
 property :site_name, String, name_property: true
 property :variables, Hash, default: {}
 property :cookbook, String
-property :template, [String, Array]
-property :nginx_dir, String, lazy { node['nginx']['dir'] }
-property :nginx_script_dir, String, lazy { node['nginx']['script_dir'] }
+property :template, String
+property :nginx_dir, String
+property :nginx_script_dir, String
 
 action :enable do
-  if new_resource.template
-    # use declare_resource so we can have a property also named template
-    declare_resource(:template, "#{new_resource.nginx_dir}/sites-available/#{new_resource.site_name}") do
-      source new_resource.template
-      cookbook new_resource.cookbook
-      variables(new_resource.variables)
-      notifies :reload, 'service[nginx]'
-    end
+  template "#{new_resource.nginx_dir}/sites-available/#{new_resource.site_name}" do
+    source new_resource.template
+    cookbook new_resource.cookbook
+    variables(new_resource.variables)
+    notifies :reload, 'service[nginx]'
+    only_if { new_resource.template }
   end
 
   execute "nxensite #{new_resource.site_name}" do

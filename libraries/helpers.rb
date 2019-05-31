@@ -12,6 +12,9 @@ module Nginx
           '/var/run/nginx.pid'
         end
       end
+
+      def nginx_default_package_name
+      end
     end
   end
 end
